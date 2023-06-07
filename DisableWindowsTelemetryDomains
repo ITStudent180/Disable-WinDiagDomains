@@ -1,0 +1,39 @@
+#Taken from this link. Build using chatGPT, note it's missing login.live domain
+#https://learn.microsoft.com/en-us/windows/privacy/configure-windows-diagnostic-data-in-your-organization
+$hostFile = "$env:windir\System32\drivers\etc\hosts"
+$addresses = @(
+    "127.0.0.1 v10.events.data.microsoft.com",
+    "127.0.0.1 v10c.events.data.microsoft.com",
+    "127.0.0.1 v10.vortex-win.data.microsoft.com",
+    "127.0.0.1 watson.telemetry.microsoft.com",
+    "127.0.0.1 umwatsonc.events.data.microsoft.com",
+    "127.0.0.1 *-umwatsonc.events.data.microsoft.com",
+    "127.0.0.1 ceuswatcab01.blob.core.windows.net",
+    "127.0.0.1 ceuswatcab02.blob.core.windows.net",
+    "127.0.0.1 eaus2watcab01.blob.core.windows.net",
+    "127.0.0.1 eaus2watcab02.blob.core.windows.net",
+    "127.0.0.1 weus2watcab01.blob.core.windows.net",
+    "127.0.0.1 weus2watcab02.blob.core.windows.net",
+    "127.0.0.1 oca.telemetry.microsoft.com",
+    "127.0.0.1 oca.microsoft.com",
+    "127.0.0.1 kmwatsonc.events.data.microsoft.com",
+    "127.0.0.1 *-kmwatsonc.events.data.microsoft.com",
+    "127.0.0.1 settings-win.data.microsoft.com"
+)
+
+# Check if the script is running with administrative privileges
+$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+if (-not $isAdmin) {
+    Write-Host "Please run this script as an administrator."
+    Exit 1
+}
+
+try {
+    $existingContent = Get-Content -Path $hostFile -Raw
+    $newContent = $existingContent + "`r`n" + ($addresses -join "`r`n")
+    $newContent | Out-File -FilePath $hostFile -Encoding ASCII
+    Write-Host "Host file has been updated successfully."
+}
+catch {
+    Write-Host "An error occurred while updating the host file: $_"
+}
