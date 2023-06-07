@@ -1,5 +1,7 @@
 # Disable-WinDiagDomains
+Description:
 Powershell script to disable windows diagnostic domains. Contributions are welcomed. 
+
 Hello Guys,
 After the lack of trustworthy tools concerning Windows tracking I decided to make my own script.
 The build method used was ChatGPT.
