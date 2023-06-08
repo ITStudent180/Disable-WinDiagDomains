@@ -11,9 +11,9 @@ Big and small contributions are welcomed.
 
 Note it may trigger antimalware and will require Powershell execution permission. 
 You may enable script execution using:
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+"Set-ExecutionPolicy -ExecutionPolicy Unrestricted"
 Then disable using
-Set-ExecutionPolicy -ExecutionPolicy default
+"Set-ExecutionPolicy -ExecutionPolicy default"
 
 Reference Script Execution:
 https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.3
