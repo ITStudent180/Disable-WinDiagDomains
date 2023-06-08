@@ -1,4 +1,5 @@
-#Taken from this link. Build using chatGPT, note it's missing login.live domain
+#Last Updated 06/07/2023, added code that prints out the content of the host file after modification. 
+#Taken from this link. Build by chatGPT, note it's missing login.live domain
 #https://learn.microsoft.com/en-us/windows/privacy/configure-windows-diagnostic-data-in-your-organization
 $hostFile = "$env:windir\System32\drivers\etc\hosts"
 $addresses = @(
@@ -37,3 +38,8 @@ try {
 catch {
     Write-Host "An error occurred while updating the host file: $_"
 }
+
+$hostsFilePath = "$env:SystemRoot\System32\drivers\etc\hosts"
+$hostsContent = Get-Content -Path $hostsFilePath -Raw
+
+Write-Output $hostsContent
